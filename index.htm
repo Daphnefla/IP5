@@ -19,14 +19,16 @@
         </form>
 
         <ul>
-          <li v-for="(value, title) in object" v-bind:title="object.title" v-bind:key="object.video_id">
-              {{ value.title }}
-              <button @click="cueVideo">queue</button>
+          <li v-for="(videoComp, index) in results" >
+              {{ videoComp.title }}
+              <button @click="cueVideo(videoComp)" >queue</button>
           </li>
         </ul>
 
         <ul>
-          <li is="queue-item" v-for="(value, index) in queue" v-bind:key="queue.video_id" v-bind:title="queue.title" v-on:remove="queue.splice(index, 1)">
+          <li v-for="(videoComp, index) in queue" v-on:remove="queue.splice(index, 1)">
+            {{videoComp.title}}
+            <button @click="removeVideo">remove</button>
           </li>
         </ul>
 
@@ -34,6 +36,7 @@
                   style="height: 30rem; width: 60rem; "
                   ref="youtube"
                   @ended="ended"
+
         ></youtube>
 
 

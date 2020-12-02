@@ -1,12 +1,4 @@
-Vue.component('queue-item', {
-  template: '\
-    <li>\
-      {{ value }}\
-      <button v-on:click="$emit(\'remove\')">Remove</button>\
-    </li>\
-  ',
-  
-})
+
 
 var vm = new Vue({
 	el: '#app',
@@ -20,7 +12,7 @@ var vm = new Vue({
 				autoplay: 1
 			},
 			queue: [],
-			object: [],
+			results: [],
 		};
 	},
 
@@ -36,21 +28,16 @@ var vm = new Vue({
 		searchVideos: function() {
 			var self = this;
 			var search = encodeURI(this.search);
-			var results;
 
 			axios.get('https://vuetv.acmoore.co.uk/search/'+search).then(function (response) {
 				self.loadVideo(response.data[0].video_id);
 				//self.cueVideo(second_result.video_id);
 				var i = 0;
 				while (i < 10) {
-					self.object.push(response.data[i]);
+					self.results.push(response.data[i]);
 					i++
 				}
-				var t = 1;
-				while (t < 10) {
-					self.cueVideo(response.data[t].video_id);
-					t++
-				}
+
 			});
 		},
 
@@ -68,11 +55,11 @@ var vm = new Vue({
 
 		nextVideo: function() {
 			var next_video = this.queue.shift();
-			this.loadVideo(next_video);
+			this.loadVideo(next_video.video_id);
 		},
 
-		cueVideo: function(video_id) {
-			this.queue.push(video_id);
+		cueVideo: function(videoComp) {
+			this.queue.push(videoComp);
 		},
 
 		ended: function() {
