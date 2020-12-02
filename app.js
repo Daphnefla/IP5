@@ -88,8 +88,15 @@ var vm = new Vue({
 		},
 
 		firstInCue: function(videoComp, index) {
-			this.queue.splice(index, 1);
+			//this.queue.splice(index, 1);
+			//this.queue.splice(0, 0, videoComp);
 			this.queue.unshift(videoComp);
+			this.loadVideo(this.queue[0].video_id);
+		},
+
+		firstInPlay: function(videoComp, index) {
+			this.queue.splice(index, 1);
+			this.queue.splice(0, 0, videoComp);
 			this.loadVideo(this.queue[0].video_id);
 		},
 
@@ -119,6 +126,18 @@ var vm = new Vue({
 		savePlaylist: function() {
 			this.playlist.push(queue);
 		},
+
+		increaseVolume: function() {
+			var unMuted = this.player.isMuted();
+			console.log(unMuted);
+			if (unMuted == "false") {
+				console.log("not mutes");
+				var volume = this.player.getVolume();
+				console.log(volume);
+				volume = volume + 10;
+				this.player.setVolume(volume);
+			}
+		}
 
 	}
 });

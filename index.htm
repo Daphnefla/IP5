@@ -31,7 +31,7 @@
             {{ videoComp.title }}
             <button @click="moveDown(videoComp, index)" >moveDown</button>
             <button @click="moveUp(videoComp, index)" >moveUp</button>
-            <button @click="firstInCue(videoComp, index)" >Play this one</button>
+            <button @click="firstInPlay(videoComp, index)" >Play this one</button>
             <button @click="removeVideo(index)">remove</button>
           </li>
         </ul>
@@ -51,6 +51,8 @@
             <button @click="pauseVideo">pause</button>
             <button @click="nextVideo">next</button>
             <button @click="previousVideo">previous</button>
+            <button @click="increaseVolume">increase volume</button>
+
         </nav>
     </div>
 
