@@ -11,6 +11,7 @@ var vm = new Vue({
 			},
 			queue: [],
 			results: [],
+			playlist: [],
 		};
 	},
 
@@ -51,6 +52,12 @@ var vm = new Vue({
 			this.player.pauseVideo();
 		},
 
+		previousVideo: function() {
+			var prev_video = this.queue.pop();
+			this.queue.unshift(prev_video);
+			this.loadVideo(prev_video.video_id);
+		},
+
 		nextVideo: function() {
 
       if (this.queue.length > 0) {
@@ -59,6 +66,15 @@ var vm = new Vue({
 			} else if (this.queue.length <= 0) {
         console.log("There is no next video. Add more if you like.");
       }
+		},
+
+		ended: function() {
+			this.nextVideo();
+		},
+
+		error: function(index) {
+			this.queue.splice(index,1);
+			this.nextVideo();
 
 		},
 
@@ -77,19 +93,9 @@ var vm = new Vue({
 			this.loadVideo(this.queue[0].video_id);
 		},
 
-		ended: function() {
-			this.nextVideo();
-		},
-
 		removeVideo: function(index) {
 			console.log(index);
 			this.queue.splice(index, 1);
-		},
-
-		previousVideo: function() {
-			var prev_video = this.queue.pop();
-			this.queue.unshift(prev_video);
-			this.loadVideo(prev_video.video_id);
 		},
 
 		moveDown: function(videoComp, index) {
@@ -99,7 +105,6 @@ var vm = new Vue({
 			if(new_index != 0) {
 				this.loadVideo(this.queue[0].video_id);
 			}
-
 		},
 
 		moveUp: function(videoComp, index) {
@@ -109,6 +114,10 @@ var vm = new Vue({
 			if (new_index === 0) {
 				this.loadVideo(videoComp.video_id);
 			}
+		},
+
+		savePlaylist: function() {
+			this.playlist.push(queue);
 		},
 
 	}
