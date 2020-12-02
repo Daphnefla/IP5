@@ -27,10 +27,11 @@ var vm = new Vue({
 		searchVideos: function() {
 			var self = this;
 			var search = encodeURI(this.search);
-
+			self.results = [];
 			axios.get('https://vuetv.acmoore.co.uk/search/'+search).then(function (response) {
 				//self.loadVideo(response.data[0].video_id);
 				//self.cueVideo(second_result.video_id);
+
 				var i = 0;
 				while (i < 10) {
 					self.results.push(response.data[i]);
@@ -89,7 +90,6 @@ var vm = new Vue({
 		firstInCue: function(videoComp, index) {
 			this.queue.splice(index, 1);
 			this.queue.unshift(videoComp);
-
 			this.loadVideo(this.queue[0].video_id);
 		},
 
