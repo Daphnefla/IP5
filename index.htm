@@ -18,16 +18,34 @@
             <button type="submit">Search</button>
         </form>
 
-        <youtube ref="youtube" :video-id="video_id" :player-vars="playerVars"></youtube>
+        <ul>
+          <li v-for="value in object">
+              {{ value }}
+              <button @click="cueVideo">queue</button>
+          </li>
+        </ul>
+
+        <ul>
+          <li v-for="value in queue">
+              {{ value }}
+              <button @click="removeVideo">Remove</button>
+          </li>
+        </ul>
+
+        <youtube :video-id="video_id" :player-vars="playerVars" :nocookie="true"
+                  style="height: 30rem; width: 60rem; "
+                  ref="youtube"
+                  @ended="ended"
+        ></youtube>
+
 
         <nav>
             <button @click="playVideo">play</button>
             <button @click="pauseVideo">pause</button>
             <button @click="nextVideo">next</button>
-            <button v-on:click="counter += 1">Add 1</button>
-            <button v-on:click="counter -= 1">subtract 1</button>
-            <p>The button above has been clicked {{ counter }} times.</p>
-            
+            <button @click="previousVideo">previous</button>
+            <button @click="cueVideo">queue</button>
+            <button @click="loadVideo">load</button>
         </nav>
     </div>
 
