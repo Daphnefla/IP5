@@ -70,6 +70,13 @@ var vm = new Vue({
 			}
 		},
 
+		firstInCue: function(videoComp, index) {
+			this.queue.splice(index, 1);
+			this.queue.unshift(videoComp);
+
+			this.loadVideo(this.queue[0].video_id);
+		},
+
 		ended: function() {
 			this.nextVideo();
 		},
@@ -85,6 +92,24 @@ var vm = new Vue({
 			this.loadVideo(prev_video.video_id);
 		},
 
+		moveDown: function(videoComp, index) {
+			this.queue.splice(index, 1);
+			var new_index = index+1;
+			this.queue.splice(new_index,0,videoComp);
+			if(new_index != 0) {
+				this.loadVideo(this.queue[0].video_id);
+			}
+
+		},
+
+		moveUp: function(videoComp, index) {
+			this.queue.splice(index, 1);
+			var new_index = index-1;
+			this.queue.splice(new_index,0,videoComp);
+			if (new_index === 0) {
+				this.loadVideo(videoComp.video_id);
+			}
+		},
 
 	}
 });

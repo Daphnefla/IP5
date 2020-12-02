@@ -21,6 +21,7 @@
         <ul>
           <li v-for="(videoComp, index) in results" >
             {{ videoComp.title }}
+            <button @click="firstInCue(videoComp, index)" >Play this one</button>
             <button @click="cueVideo(videoComp)" >queue</button>
           </li>
         </ul>
@@ -28,6 +29,9 @@
         <ul>
           <li v-for="(videoComp, index) in queue" v-on:remove="queue.splice(index, 1)">
             {{ videoComp.title }}
+            <button @click="moveDown(videoComp, index)" >moveDown</button>
+            <button @click="moveUp(videoComp, index)" >moveUp</button>
+            <button @click="firstInCue(videoComp, index)" >Play this one</button>
             <button @click="removeVideo(index)">remove</button>
           </li>
         </ul>
