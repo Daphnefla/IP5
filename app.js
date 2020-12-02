@@ -1,5 +1,3 @@
-
-
 var vm = new Vue({
 	el: '#app',
 
@@ -30,7 +28,7 @@ var vm = new Vue({
 			var search = encodeURI(this.search);
 
 			axios.get('https://vuetv.acmoore.co.uk/search/'+search).then(function (response) {
-				self.loadVideo(response.data[0].video_id);
+				//self.loadVideo(response.data[0].video_id);
 				//self.cueVideo(second_result.video_id);
 				var i = 0;
 				while (i < 10) {
@@ -54,8 +52,15 @@ var vm = new Vue({
 		},
 
 		nextVideo: function() {
-			var next_video = this.queue.shift();
-			this.loadVideo(next_video.video_id);
+
+      if (this.queue.length > 0) {
+        var next_video = this.queue.shift();
+				this.queue.push(next_video);
+        this.loadVideo(this.queue[0].video_id);
+			} else if (this.queue.length <= 0) {
+        console.log("There is no next video. Add more if you like.");
+      }
+
 		},
 
 		cueVideo: function(videoComp) {
@@ -72,8 +77,9 @@ var vm = new Vue({
 		},
 
 		previousVideo: function() {
-			var prev_video = this.queue.unshift();
-			this.loadVideo(prev_video);
+			var prev_video = this.queue.pop();
+			this.queue.unshift(prev_video);
+			this.loadVideo(prev_video.video_id);
 		},
 
 
