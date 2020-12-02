@@ -12,6 +12,7 @@ var vm = new Vue({
 			queue: [],
 			results: [],
 			playlist: [],
+			volume: 50,
 		};
 	},
 
@@ -67,6 +68,24 @@ var vm = new Vue({
 			} else if (this.queue.length <= 0) {
         console.log("There is no next video. Add more if you like.");
       }
+		},
+
+		increaseVolume: function() {
+			console.log(this.volume);
+			this.player.setVolume(this.volume);
+			if (this.volume >= 0 && this.volume < 100 ){
+				this.volume = this.volume + 10;
+				this.player.setVolume(this.volume);
+			}
+		},
+
+		decreaseVolume: function() {
+			console.log(this.volume);
+			this.player.setVolume(this.volume);
+			if (this.volume > 0 && this.volume <= 100 ){
+				this.volume = this.volume - 10;
+				this.player.setVolume(this.volume);
+			}
 		},
 
 		ended: function() {
@@ -127,17 +146,7 @@ var vm = new Vue({
 			this.playlist.push(queue);
 		},
 
-		increaseVolume: function() {
-			var unMuted = this.player.isMuted();
-			console.log(unMuted);
-			if (unMuted == "false") {
-				console.log("not mutes");
-				var volume = this.player.getVolume();
-				console.log(volume);
-				volume = volume + 10;
-				this.player.setVolume(volume);
-			}
-		}
+
 
 	}
 });
