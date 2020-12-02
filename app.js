@@ -66,8 +66,9 @@ var vm = new Vue({
 			this.nextVideo();
 		},
 
-		removeVideo: function() {
-			this.queue.shift();
+		removeVideo: function(index) {
+			console.log(index);
+			this.queue.splice(index, 1);
 		},
 
 		previousVideo: function() {

@@ -20,17 +20,19 @@
 
         <ul>
           <li v-for="(videoComp, index) in results" >
-              {{ videoComp.title }}
-              <button @click="cueVideo(videoComp)" >queue</button>
+            {{ videoComp.title }}
+            <button @click="cueVideo(videoComp)" >queue</button>
           </li>
         </ul>
 
         <ul>
           <li v-for="(videoComp, index) in queue" v-on:remove="queue.splice(index, 1)">
-            {{videoComp.title}}
-            <button @click="removeVideo">remove</button>
+            {{ videoComp.title }}
+            <button @click="removeVideo(index)">remove</button>
           </li>
         </ul>
+
+
 
         <youtube :video-id="video_id" :player-vars="playerVars" :nocookie="true"
                   style="height: 30rem; width: 60rem; "
@@ -45,8 +47,6 @@
             <button @click="pauseVideo">pause</button>
             <button @click="nextVideo">next</button>
             <button @click="previousVideo">previous</button>
-            <button @click="cueVideo">queue</button>
-            <button @click="loadVideo">load</button>
         </nav>
     </div>
 
