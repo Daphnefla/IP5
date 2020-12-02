@@ -1,3 +1,13 @@
+Vue.component('queue-item', {
+  template: '\
+    <li>\
+      {{ value }}\
+      <button v-on:click="$emit(\'remove\')">Remove</button>\
+    </li>\
+  ',
+  
+})
+
 var vm = new Vue({
 	el: '#app',
 

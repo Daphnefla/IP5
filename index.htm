@@ -19,16 +19,14 @@
         </form>
 
         <ul>
-          <li v-for="value in object">
-              {{ value }}
+          <li v-for="(value, title) in object" v-bind:title="object.title" v-bind:key="object.video_id">
+              {{ value.title }}
               <button @click="cueVideo">queue</button>
           </li>
         </ul>
 
         <ul>
-          <li v-for="value in queue">
-              {{ value }}
-              <button @click="removeVideo">Remove</button>
+          <li is="queue-item" v-for="(value, index) in queue" v-bind:key="queue.video_id" v-bind:title="queue.title" v-on:remove="queue.splice(index, 1)">
           </li>
         </ul>
 
