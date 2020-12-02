@@ -54,8 +54,7 @@ var vm = new Vue({
 		nextVideo: function() {
 
       if (this.queue.length > 0) {
-        var next_video = this.queue.shift();
-				this.queue.push(next_video);
+				this.queue.push(this.queue.shift());
         this.loadVideo(this.queue[0].video_id);
 			} else if (this.queue.length <= 0) {
         console.log("There is no next video. Add more if you like.");
@@ -65,6 +64,10 @@ var vm = new Vue({
 
 		cueVideo: function(videoComp) {
 			this.queue.push(videoComp);
+
+			if (this.queue.length === 1) {
+				this.loadVideo(this.queue[0].video_id);
+			}
 		},
 
 		ended: function() {
