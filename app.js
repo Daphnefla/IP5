@@ -36,7 +36,7 @@ var vm = new Vue({
 					self.object.push(response.data[i]);
 					i++
 				}
-				var t = 0;
+				var t = 1;
 				while (t < 10) {
 					self.cueVideo(response.data[t].video_id);
 					t++
@@ -58,7 +58,6 @@ var vm = new Vue({
 
 		nextVideo: function() {
 			var next_video = this.queue.shift();
-
 			this.loadVideo(next_video);
 		},
 
