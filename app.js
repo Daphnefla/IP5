@@ -71,7 +71,6 @@ var vm = new Vue({
 		},
 
 		increaseVolume: function() {
-			console.log(this.volume);
 			this.player.setVolume(this.volume);
 			if (this.volume >= 0 && this.volume < 100 ){
 				this.volume = this.volume + 10;
@@ -80,7 +79,6 @@ var vm = new Vue({
 		},
 
 		decreaseVolume: function() {
-			console.log(this.volume);
 			this.player.setVolume(this.volume);
 			if (this.volume > 0 && this.volume <= 100 ){
 				this.volume = this.volume - 10;
@@ -99,24 +97,34 @@ var vm = new Vue({
 		},
 
 		cueVideo: function(videoComp) {
-			this.queue.push(videoComp);
+			if (this.queue.includes(videoComp)){
+				return;
+			} else {
+				this.queue.push(videoComp);
 
-			if (this.queue.length === 1) {
-				this.loadVideo(this.queue[0].video_id);
+				if (this.queue.length === 1) {
+					this.loadVideo(this.queue[0].video_id);
+				}
 			}
 		},
 
 		firstInCue: function(videoComp, index) {
-			//this.queue.splice(index, 1);
-			//this.queue.splice(0, 0, videoComp);
+			if (this.queue.includes(videoComp)){
+				return;
+			} else {
 			this.queue.unshift(videoComp);
 			this.loadVideo(this.queue[0].video_id);
+		}
 		},
 
 		firstInPlay: function(videoComp, index) {
-			this.queue.splice(index, 1);
-			this.queue.splice(0, 0, videoComp);
-			this.loadVideo(this.queue[0].video_id);
+			if (index === 0) {
+				return
+			} else {
+				this.queue.splice(index, 1);
+				this.queue.splice(0, 0, videoComp);
+				this.loadVideo(this.queue[0].video_id);
+			}
 		},
 
 		removeVideo: function(index) {
@@ -142,11 +150,8 @@ var vm = new Vue({
 			}
 		},
 
-		savePlaylist: function() {
-			this.playlist.push(queue);
+		clearAll: function(){
+			this.queue = [];
 		},
-
-
-
 	}
 });
