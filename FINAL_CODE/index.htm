@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="imgs/app_icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <title>Duli</title>
+
+    <script src="https://vuetv.acmoore.co.uk/js/vue-bundle.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<body id="background">
+  <img src="imgs/duli_white.png" alt="Logo DULI" class="logo" id="logo">
+  <div class="main">
+    <div id="app">
+      <div class="suggestions">
+        <form v-on:submit.prevent="searchVideos">
+            <input type="text" placeholder="Search Video" v-model="search">
+            <button type="submit" class="search"><img src="imgs/search.png" alt="search" class="search"> </button>
+        </form>
+
+        <ul class="searchlist">
+          <li v-for="(videoComp, index) in results" >
+            <img class="imagelist" v-bind:src="videoComp.image">
+            {{ videoComp.title }}
+            <button @click="firstInCue(videoComp, index)" ><img src="imgs/playblack.png" alt="play"> </button>
+            <button @click="cueVideo(videoComp)" ><img src="imgs/add.png" alt="add"> </button>
+          </li>
+        </ul>
+      </div>
+
+        <div class="queuelist">
+          <button @click="clearAll">clear all</button>
+          <ul>
+            <li v-for="(videoComp, index) in queue" v-on:remove="queue.splice(index, 1)">
+              <img v-bind:src="videoComp.image" class="videoimg">
+              <p class="queueitem">{{ videoComp.title }}</p>
+              <div class="queuebuttons">
+              <!--  <img src="imgs/down.png" alt="Move down" class="down" @click="moveDown(videoComp, index)">
+                <img src="imgs/up.png" alt="Move up" class="up" @click="moveUp(videoComp, index)" >
+                <img src="imgs/play.png" alt="Play this video" class="play" @click="firstInPlay(videoComp, index)" >
+                <img src="imgs/remove.png" alt="Remove this video" class="remove" @click="removeVideo(index)">   -->
+                <button @click="moveDown(videoComp, index)"><img class="down" src="imgs/down.png" alt="down"> </button>
+                <button @click="moveUp(videoComp, index)"><img class="up" src="imgs/up.png" alt="up"></button>
+                <button @click="firstInPlay(videoComp, index)"><img class="play" src="imgs/playblack.png" alt="play"></button>
+                <button @click="removeVideo(index)"><img class="remove" src="imgs/remove.png" alt="remove"></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ytvideo">
+          <youtube :video-id="video_id" :player-vars="playerVars" :nocookie="true"
+                    ref="youtube"
+                    @ended="ended"
+                    @error="error(index)" class="video"
+          ></youtube>
+
+          <nav>
+            <button @click="previousVideo"><img class="previous" src="imgs/previous.png" alt="previous"> </button>
+            <button @click="pauseVideo"><img src="imgs/pause.png" alt="pause"></button>
+            <button @click="playVideo"><img src="imgs/play.png" alt="play"></button>
+            <button @click="nextVideo"><img class="next" src="imgs/next.png" alt="next"></button>
+            <div class=""></div>
+            <button @click="decreaseVolume"><img class="min" src="imgs/min.png" alt="min"></button>
+            <button @click="increaseVolume"><img src="imgs/plus.png" alt="plus"></button>
+          </nav>
+        </div>
+
+        <div class="about">
+          <h1>How to use DULI</h1>
+          <p>STEP 1 - Search for a video or music you would like to listen to. </p>
+          <p>STEP 2 - Add it to the playlist or play a song directly. </p>
+          <p>STEP 3 - Sing along with the music or skip it right away. When the song is done, the next music video will play immediately. The previous song again? That's possible. Just click on the 'previous' icon. </p>
+          <p>STEP 4 - Delete or move items in the music list. Adjust it to what you want. </p>
+          <p>Your playlist will never stop. The videos in the music list will always come back.) </p>
+        </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <img src="imgs/duli_color.png" alt="Logo DULI" class="logofooter">
+    <a href="#logo"><img src="imgs/up.png" alt="Go back to the top of the page" class="backtotop"></a>
+
+  </footer>
+
+
+</body>
+<!---<script>
+  var i = 0;
+  function change() {
+    console.log("change");
+    var doc = document.getElementById("background");
+    var color = ["black", "blue", "brown", "green"];
+    doc.style.backgroundImage = 'linear-gradient('
+          + color[i] + ', ' + color[i+1] + ')';
+    i = (i + 1) % color.length;
+
+  }
+  setInterval(change, 1000);
+</script>-->
+</html>

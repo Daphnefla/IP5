@@ -29,7 +29,7 @@ var vm = new Vue({
 			var self = this;
 			var search = encodeURI(this.search);
 			self.results = [];
-			axios.get('https://vuetv.acmoore.co.uk/search/'+search).then(function (response) {
+			axios.get('https://vuetv.acmoore.co.uk/search/officialmusicvideo'+search).then(function (response) {
 				//self.loadVideo(response.data[0].video_id);
 				//self.cueVideo(second_result.video_id);
 
@@ -84,6 +84,10 @@ var vm = new Vue({
 				this.volume = this.volume - 10;
 				this.player.setVolume(this.volume);
 			}
+		},
+
+		muteVolume: function() {
+			this.player.setVolume(0);
 		},
 
 		ended: function() {
@@ -154,4 +158,5 @@ var vm = new Vue({
 			this.queue = [];
 		},
 	}
+
 });
