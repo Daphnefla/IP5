@@ -27,7 +27,7 @@
           <li v-for="(videoComp, index) in results" >
             <img class="imagelist" v-bind:src="videoComp.image">
             {{ videoComp.title }}
-            <button @click="firstInCue(videoComp, index)" ><img src="imgs/playblack.png" alt="play"> </button>
+            <button @click="firstInCue(videoComp, index)" ><img class="searchplaybutton" src="imgs/playblack.png" alt="play"> </button>
             <button @click="cueVideo(videoComp)" ><img src="imgs/add.png" alt="add"> </button>
           </li>
         </ul>

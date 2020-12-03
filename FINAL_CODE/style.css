@@ -197,12 +197,17 @@ ul.searchlist::-webkit-scrollbar{
 .searchlist li{
   margin-top: 0.8rem;
   display: grid;
-  grid-template-columns: 7rem 9rem 2rem 2rem;
+  grid-template-columns: 8rem 11rem 3rem 2rem;
   grid-auto-rows: minmax(min-content, max-content);
+}
+
+.searchplaybutton {
+  margin-left: 1rem;
 }
 
 .imagelist{
   width: 7rem;
+  margin-right: 2rem;
 }
 
 .searchlist button{
