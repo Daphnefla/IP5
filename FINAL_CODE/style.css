@@ -8,9 +8,18 @@ html * {
 }
 
 body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.body1 {
   background: rgb(246,150,137);
   background: radial-gradient(circle, rgba(246,150,137,1) 0%, rgba(247,107,137,1) 100%);
-  margin: 0;
+}
+
+.body2 {
+  background: rgb(150,215,226);
+  background: radial-gradient(circle, rgba(150,215,226,1) 0%, rgba(243,248,241,1) 100%);
 }
 
 .logo {
@@ -25,7 +34,7 @@ body {
 footer {
   background-color: #262626;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .logofooter {
@@ -68,6 +77,9 @@ footer {
 }
 
 .queuelist {
+  height: fit-content;
+  max-height: 30rem;
+  overflow: auto;
   grid-column: 1;
   grid-row: 3;
   background-color: #262626;
@@ -75,6 +87,12 @@ footer {
   border-radius: 20px;
   position: relative;
 }
+
+.queuelist::-webkit-scrollbar{
+  background-color: none;
+  width: 0;
+}
+
 
 .queuelist > button {
   position: absolute;
@@ -100,6 +118,8 @@ footer {
   grid-gap: 10px;
   margin-top: 10px;
   margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .videoimg {
@@ -186,7 +206,7 @@ ul.searchlist{
   border-radius: 15px;
   max-height: 21.5rem;
   opacity: 0.9;
-  padding: 0 1rem 0 2rem;
+  padding: 0 1rem 0 1rem;
   overflow: auto;
 }
 ul.searchlist::-webkit-scrollbar{
@@ -197,23 +217,20 @@ ul.searchlist::-webkit-scrollbar{
 .searchlist li{
   margin-top: 0.8rem;
   display: grid;
-  grid-template-columns: 8rem 11rem 3rem 2rem;
+  grid-template-columns: 7rem 9rem 1.5rem 1.5rem;
   grid-auto-rows: minmax(min-content, max-content);
-}
-
-.searchplaybutton {
-  margin-left: 1rem;
+  grid-gap: 10px;
 }
 
 .imagelist{
-  width: 7rem;
-  margin-right: 2rem;
+  width: 100%;
 }
 
 .searchlist button{
   height: 2rem;
   width: 2rem;
-  padding-top: 0.2rem;
+  margin-top: auto;
+  margin-bottom: auto;
   border: none;
   background: none;
 }
@@ -246,6 +263,13 @@ nav button img{
 .previous,.next{
   width: auto;
   height: 1.2rem;
+}
+
+.about{
+  background-color: white;
+  border-radius: 15px;
+  opacity: 0.9;
+  padding: 0 1rem 0 1rem;
 }
 
 
@@ -307,4 +331,8 @@ nav button img{
     }
   }
 
-}
+  @media (min-width: 1500px) {
+    .main{
+      width: 80%;
+    }
+  }
